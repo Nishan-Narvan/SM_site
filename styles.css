@@ -1,0 +1,183 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Nikea';
+  /* IMPORTANT: Make sure 'path/to/Nikea.otf' is the correct path to your font file */
+  /* For example, if Nikea.otf is in the same folder as styles.css, it would be: */
+  /* src: url('Nikea.otf') format('opentype'); */
+  /* Or if it's in an 'assets/fonts' folder: */
+  /* src: url('../assets/fonts/Nikea.otf') format('opentype'); */
+  src: url('path/to/Nikea.otf') format('opentype');
+}
+
+body{
+    /* background-color: antiquewhite; */ /* This was commented out, which is fine */
+    background-position: center;
+    background-repeat: no-repeat;
+     background-image: url('./9393460-1.webp');
+    /* background-repeat: no-repeat; */ /* This is a duplicate, can be removed */
+    background-size: cover;
+}
+
+a{ /* General styles for <a> tags, if any are used outside of specific components */
+   font-size: 35px;
+    font-style: normal;
+    color: rgb(240, 239, 239);
+    font-family: 'Impact', 'Bebas Neue', sans-serif;
+    font-weight: 700;
+} 
+
+p{ /* General styles for <p> tags. The title paragraph will get more specific styles below. */
+    font-size: 15px;
+    font-style: normal;
+    color: rgb(238, 233, 233);
+    font-family: 'Impact', 'Bebas Neue', sans-serif;
+    font-weight: 700;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* backface-visibility: hidden; */ /* This can sometimes help with 3D transform flickering, but not always necessary */
+}
+
+nav, footer { /* Your existing nav and footer styles - these are fine */
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    padding: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+nav{
+    top:0;
+}
+
+footer{
+    bottom: 0;
+}
+
+.container{ /* Your existing container styles - these are fine */
+    position: relative;
+    width: 100vw;
+    height: 100svh;
+    overflow: hidden;
+}
+
+.gallery-container { /* Your existing gallery-container styles - these are fine */
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style:preserve-3d ;
+    perspective: 2000px;
+    will-change: transform;
+}
+
+.gallery{ /* Your existing gallery styles - these are fine */
+    position: relative;
+    width: 600px; /* Consider making this responsive with max-width or percentages later */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center;
+    will-change: transform;
+}
+
+.card{ /* Your existing card styles - these are fine */
+    position: absolute;
+    width: 95px;
+    height: 100px;
+    border-radius: 4px;
+    transform-origin: center;
+    will-change: transform;
+    transform: preserve-3d; /* Correct for 3D effects */
+    backface-visibility: visible; /* This is fine, 'hidden' would hide the back */
+    overflow: hidden;
+}
+
+/* --- MODIFIED/FIXED SECTION FOR TITLE AND BUTTON --- */
+.title-container {
+    position: fixed;
+    bottom: 20%;     /* Adjusted bottom slightly, feel free to change */
+    left: 50%;
+    transform: translateX(-50%); /* Only X transform to center horizontally */
+    width: 90%;      /* Give it some width, but not necessarily 100% of viewport */
+    max-width: 600px; /* Max width so it doesn't get too wide on large screens */
+    
+    display: flex;
+    flex-direction: column; /* Stack title and button vertically */
+    align-items: center;    /* Horizontally center the title and button */
+    gap: 15px;              /* Space between title and button */
+    
+    z-index: 10;            /* Ensure it's above the gallery in preview mode */
+    pointer-events: none;   /* Clicks pass through container; children will enable their own */
+    /* clip-path: polygon(0 0, 100% 0,100% 100%, 0% 100%); */
+    /* what does this clippath mean??? */
+    /* This clip-path creates a rectangle that shows the entire element. By itself, it does nothing visible.
+       It's often used as a starting point for animations where you want to animate the clip-path's shape
+       (e.g., to reveal the element). If you're not animating the clip-path, you can remove it.
+       Given the GSAP y-transform animation, this specific clip-path isn't essential here.
+       Removing height: 42px allows the container to grow with its content (title + button).
+    */
+}
+
+.title-container p { /* This is the album title paragraph */
+    position: relative; /* No longer absolute, flexbox handles positioning */
+    width: auto;        /* Let it be as wide as its text */
+    text-align: center;
+    font-size: 36px;    /* Overrides general 'p' tag font-size */
+    letter-spacing: -0.05rem;
+    color: #f0f0f0;     /* A light color for better visibility on dark backgrounds */
+    /* Ensure other p styles like font-family are what you want or override here */
+    font-family: 'Impact', 'Bebas Neue', sans-serif; /* Example from your general p */
+    font-weight: 700; /* Example from your general p */
+    pointer-events: auto; /* If you ever want the title itself to be clickable for some reason */
+    opacity: 0; /* Initial state for GSAP, will be animated in script.js */
+    transform: translateY(25px); /* Initial state for GSAP */
+}
+/* --- END OF MODIFIED/FIXED SECTION --- */
+
+.preview-link-button { /* Your existing button styles - these are good */
+    padding: 12px 25px;
+    background-color: #1f1f1f;
+    color: antiquewhite;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block; /* This is fine */
+    opacity: 0; /* Start hidden for GSAP animation */
+    transform: translateY(50px); /* Start slightly lower for GSAP animation */
+    will-change: transform, opacity;
+    pointer-events: auto; /* Button should be clickable */
+}
+
+.preview-link-button:hover {
+    background-color: #333; /* Darker shade on hover */
+}
+
+.word {
+    position: relative;
+    display: inline-block; /* Correct for SplitText-like behavior if you were to use it */
+    will-change: transform;
+    /* what is this will change for   */
+    /* 'will-change: transform;' is a hint to the browser that the 'transform' property
+       of this element is expected to change frequently (e.g., during an animation).
+       It allows the browser to potentially optimize rendering for these changes,
+       sometimes by promoting the element to its own layer. Use it judiciously,
+       as overusing it can consume more memory. For animated text words, it's often appropriate.
+    */
+}

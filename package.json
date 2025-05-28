@@ -1,0 +1,17 @@
+{
+  "name": "sm_site",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node index.html"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "split-text": "^1.0.0"
+  }
+}
