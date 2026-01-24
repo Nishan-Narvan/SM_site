@@ -178,6 +178,6 @@ footer{
        of this element is expected to change frequently (e.g., during an animation).
        It allows the browser to potentially optimize rendering for these changes,
        sometimes by promoting the element to its own layer. Use it judiciously,
-       as overusing it can consume more memory. For animated text words, it's often appropriate.
+       as overusing it can consume more memory. For animated text words, it's often appropriate.dfdfdf
     */
 }
